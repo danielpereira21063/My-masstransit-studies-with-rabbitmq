@@ -1,6 +1,4 @@
-using DependencyInjection;
-using OrderService.Endpoints;
-using OrderService.Extensions;
+using TrakingService.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +7,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigureMassTransit();
 
 var app = builder.Build();
-
-app.MapOrderEndpoints();
 
 if (app.Environment.IsDevelopment())
 {

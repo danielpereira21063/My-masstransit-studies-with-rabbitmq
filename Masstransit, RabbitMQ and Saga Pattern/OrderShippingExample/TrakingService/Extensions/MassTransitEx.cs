@@ -1,7 +1,7 @@
 ﻿using MassTransit;
-using ShippingService.Consumers;
+using TrakingService.Consumers;
 
-namespace ShippingService.Extensions
+namespace TrakingService.Extensions
 {
     public static class MassTransitEx
     {
@@ -19,13 +19,13 @@ namespace ShippingService.Extensions
                         h.Password("admin");
                     });
 
-                    config.ReceiveEndpoint("shipping-order-queue", e =>
+                    config.ReceiveEndpoint("tracking-order-placed", e =>
                     {
                         e.ConfigureConsumer<OrderPlacedConsumer>(context);
 
                         e.Bind("order-placed-exchange", x =>
                         {
-                            x.RoutingKey = "order.created";
+                            x.RoutingKey = "order.tracking";
                             x.ExchangeType = "direct";
                         });
 

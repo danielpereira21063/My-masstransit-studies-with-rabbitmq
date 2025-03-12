@@ -1,6 +1,6 @@
 [
   {
-    "Name": "New Profile",
+    "Name": "All Services",
     "Projects": [
       {
         "Path": "OrderService\\OrderService.csproj",
@@ -8,6 +8,10 @@
       },
       {
         "Path": "ShippingService\\ShippingService.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "TrakingService\\TrakingService.csproj",
         "Action": "Start"
       }
     ]

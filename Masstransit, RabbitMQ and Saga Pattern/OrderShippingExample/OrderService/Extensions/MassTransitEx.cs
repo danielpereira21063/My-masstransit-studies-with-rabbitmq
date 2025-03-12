@@ -1,4 +1,5 @@
 ﻿using MassTransit;
+using SharedMessages.Messages;
 
 namespace OrderService.Extensions
 {
@@ -15,7 +16,14 @@ namespace OrderService.Extensions
                         h.Username("admin");
                         h.Password("admin");
                     });
+
+                    config.Message<OrderPlaced>(x => x.SetEntityName("order-placed-exchange"));
+                    config.Publish<OrderPlaced>(x =>
+                    {
+                        x.ExchangeType = "direct";
+                    });
                 });
+
             });
         }
     }

@@ -11,7 +11,11 @@ namespace OrderService.Endpoints
             app.MapPost("/orders", async (OrderRequest order, IBus bus) =>
             {
                 var orderPlacedMessage = new OrderPlaced(order.OrderId, order.Quantity);
-                await bus.Publish(orderPlacedMessage);
+
+                await bus.Publish(orderPlacedMessage, context =>
+                {
+                    context.SetRoutingKey(order.Quantity > 10 ? "order.shipping" : "order.tracking");
+                });
 
                 return Results.Created($"/orders/{order.OrderId}", orderPlacedMessage);
             });
