@@ -18,10 +18,7 @@ namespace OrderService.Extensions
                     });
 
                     config.Message<OrderPlaced>(x => x.SetEntityName("order-placed-exchange"));
-                    config.Publish<OrderPlaced>(x =>
-                    {
-                        x.ExchangeType = "direct";
-                    });
+                    config.Publish<OrderPlaced>(x => { x.ExchangeType = "fanout"; });
                 });
 
             });

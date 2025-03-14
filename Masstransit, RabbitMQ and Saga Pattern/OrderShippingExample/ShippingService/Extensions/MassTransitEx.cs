@@ -21,14 +21,19 @@ namespace ShippingService.Extensions
 
                     config.ReceiveEndpoint("shipping-order-queue", e =>
                     {
-                        e.ConfigureConsumer<OrderPlacedConsumer>(context);
+                        e.Consumer<OrderPlacedConsumer>();
 
                         e.Bind("order-placed-exchange", x =>
                         {
-                            x.RoutingKey = "order.created";
-                            x.ExchangeType = "direct";
+                            x.ExchangeType = "fanout";
                         });
+                        //e.ConfigureConsumer<OrderPlacedConsumer>(context);
 
+                        //e.Bind("order-placed-exchange", x =>
+                        //{
+                        //    x.RoutingKey = "order.created";
+                        //    x.ExchangeType = "direct";
+                        //});
                     });
                 });
             });
